@@ -42,9 +42,9 @@ form hit it.
 None of these reports has a day and month swapped. The booking lands one day early, or on a
 different day depending on where the reader is: "Client in Lisbon got Tuesday. Client in
 Toronto got Monday." That points at time zones, not at the parser. The desk listed them in
-`desk-notes.json` as a one-day move. The #4471 page counts them inside `parser` and footnotes
-them. This page gives them their own row, so its `parser` row is smaller than #4471's by
-exactly that row.
+`desk-notes.json` as a one-day move. The desk counts a report where it is filed and footnotes
+what it was read as (`readAs` in `causes.ts`), so these stay in the `parser` row as well as
+having a row and a ticket of their own.
 
 The tenant and the channel decide a report's cause (`causes.ts`). Intake's tag guesses from the
 reporter's browser and disagrees with the cause often, so this page does not use it.

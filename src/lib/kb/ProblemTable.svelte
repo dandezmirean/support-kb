@@ -1,17 +1,19 @@
 <script lang="ts">
   import reports from '#lib/data/reports-4471.json';
   import notes from '#lib/data/desk-notes.json';
-  import { groupByCause, uniqueById, type Report } from '#lib/kb/causes';
+  import { groupByCause, readAs, uniqueById, type Report } from '#lib/kb/causes';
   import { tenantOf } from '#lib/kb/locales';
 
-  // One row per problem: the causes from causes.ts, with the desk's one-day moves taken out as their own row.
+  // One row per problem: the causes from causes.ts, plus the desk's one-day moves as their own row.
+  // The desk counts those where they're filed too (causes.ts readAs), so they appear in both rows.
   let { ticket, issues }: { ticket: number; issues: Record<string, string> } = $props();
 
   const merged = $derived(uniqueById(reports as Report[]).filter((r) => r.mergedInto === ticket));
+  const groups = $derived(groupByCause(merged, tenantOf));
   const moved = $derived(merged.filter((r) => notes.oneDayMove.includes(r.id)));
   const rows = $derived(
     [
-      ...groupByCause(merged.filter((r) => !moved.includes(r)), tenantOf).map((g) => ({ problem: g.cause as string, reports: g.reports })),
+      ...groups.map((g) => ({ problem: g.cause as string, reports: g.reports })),
       { problem: 'oneDayMove', reports: moved },
     ].map(({ problem, reports }) => {
       const days = reports.map((r) => r.receivedAt.slice(0, 10)).sort();
@@ -41,6 +43,14 @@
   </tbody>
 </table>
 
+{#each groups as g (g.cause)}
+  {@const both = readAs(g, notes.oneDayMove)}
+  {#if both}
+    <p class="note">{both} reports counted twice: under <code>{g.cause}</code>, where the desk filed them, and under <code>oneDayMove</code>.</p>
+  {/if}
+{/each}
+
 <style>
   .sum { font-size: 1.1rem; }
+  .note { color: var(--muted); font-size: 0.85em; }
 </style>
