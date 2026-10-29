@@ -9,6 +9,7 @@ signature: dandezmirean
 
 <script>
   import CauseTable from '#lib/kb/CauseTable.svelte';
+  import TicketCounts from '#lib/kb/TicketCounts.svelte';
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
 </script>
 
@@ -16,8 +17,11 @@ signature: dandezmirean
 one fix queued. Most of its reports share one cause, the parser, and #4471 is that ticket. Two
 other problems sit inside it, and the queued fix covers neither. Each now has its own ticket:
 
-- `hint`: [#2](https://github.com/dandezmirean/support-kb/issues/2)
-- one-day move: [#5](https://github.com/dandezmirean/support-kb/issues/5)
+<TicketCounts
+  ticket={4471}
+  hint="https://github.com/dandezmirean/support-kb/issues/2"
+  oneDayMove="https://github.com/dandezmirean/support-kb/issues/5"
+/>
 
 <CauseTable ticket={4471} />
 
