@@ -1,6 +1,6 @@
 ---
 layout: runbook
-title: '#4471 · one more problem in one ticket'
+title: '#4471 · two more problems in one ticket'
 owner: dandezmirean
 status: open
 reviewed: 2026-10-29
@@ -13,9 +13,11 @@ signature: dandezmirean
 </script>
 
 [#4471](/kb/incidents/4471) holds every report about a wrong date and calls them one issue with
-one fix queued. Most of its reports share one cause, the parser, and #4471 is that ticket. One
-other problem sits inside it, and the queued fix does not cover it. It now has its own ticket:
-[#2](https://github.com/dandezmirean/support-kb/issues/2), for the `hint` row.
+one fix queued. Most of its reports share one cause, the parser, and #4471 is that ticket. Two
+other problems sit inside it, and the queued fix covers neither. Each now has its own ticket:
+
+- `hint`: [#2](https://github.com/dandezmirean/support-kb/issues/2)
+- one-day move: [#5](https://github.com/dandezmirean/support-kb/issues/5)
 
 <CauseTable ticket={4471} />
 
@@ -29,7 +31,8 @@ ticket for this row.
 The reports in the note under the table have no day and month swapped. The booking lands one
 day early, or on a different day depending on where the reader is: "Client in Lisbon got
 Tuesday. Client in Toronto got Monday." That points at time zones, not at the parser. The desk files them
-under `parser` by tenant and counts them there, so they stay in #4471.
+under `parser` by tenant and counts them there. Ticket [#5](https://github.com/dandezmirean/support-kb/issues/5) tracks
+them as their own problem.
 
 ## hint
 
