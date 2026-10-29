@@ -13,12 +13,12 @@ signature: v1.eyJzdWIiOiIxMzQyIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYX
 </script>
 
 [#4471](/kb/incidents/4471) holds every report about a wrong date and calls them one issue with
-one fix queued. Most of its reports share one cause, the parser, and #4471 is that ticket. Two
-other problems sit inside it, and the queued fix covers neither. Each has its own ticket now.
+one fix queued. Most of its reports share one cause, the parser. Two other problems sit inside
+it, and the queued fix covers neither. Each of the three has its own ticket now.
 
 <CauseTable ticket={4471} />
 
-## parser: #4471
+## parser: [#7](https://github.com/dandezmirean/support-kb/issues/7)
 
 The shared parser reads every date month first. All our tenants write the day first, so a
 booking for 2 March comes out as 3 February. This covers app and email reports from every
