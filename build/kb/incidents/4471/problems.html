@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="../../../_app/immutable/entry/start.BPrDg8QY.js" rel="modulepreload">
+    <link href="../../../_app/immutable/entry/start.BrXcwX5p.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/D53Klj1W.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/B0kEqKbB.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/BV_0Go1h.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/CBSprFQ0.js" rel="modulepreload">
-		<link href="../../../_app/immutable/entry/app.BF5XwTYQ.js" rel="modulepreload">
+		<link href="../../../_app/immutable/entry/app.BsOx_Qnx.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/BioDTa1x.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/YJMK2mfk.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/BpiLjVpJ.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/CQTwZ8f2.js" rel="modulepreload">
 		<link href="../../../_app/immutable/nodes/0.BVN7pwr5.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/D3yrZuD4.js" rel="modulepreload">
-		<link href="../../../_app/immutable/nodes/5.C-_xAMPu.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/BqpwAt2o.js" rel="modulepreload">
+		<link href="../../../_app/immutable/nodes/5.C2doVDQI.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/DpWyyPds.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/BwTCDw2P.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/D6TElhNd.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/BaTbK9hq.js" rel="modulepreload">
@@ -29,28 +29,30 @@
 one fix queued. The reports describe three problems, and one fix covers only the first. Each
 problem now has its own ticket:</p> <ul><li><code>parser</code>: <a href="https://github.com/dandezmirean/support-kb/issues/1" rel="nofollow">#1</a></li> <li><code>hint</code>: <a href="https://github.com/dandezmirean/support-kb/issues/2" rel="nofollow">#2</a></li> <li>one-day move: <a href="https://github.com/dandezmirean/support-kb/issues/3" rel="nofollow">#3</a></li></ul> <p class="sum svelte-12oyimm"><strong>412</strong> reports merged into #4471 · <strong>2</strong> causes</p> <table><thead><tr><th>cause</th><th>reports</th><th>tagged as</th><th>tenants</th><th>seen</th><th></th></tr></thead><tbody><!--[--><tr class="svelte-12oyimm"><td class="svelte-12oyimm"><code>parser</code></td><td class="svelte-12oyimm">379</td><td class="tags svelte-12oyimm">parser ×356 · hint ×23</td><td class="svelte-12oyimm">11</td><td class="svelte-12oyimm">2026-04-01 → 2026-10-04</td><td class="svelte-12oyimm">#4471</td></tr><tr class="svelte-12oyimm wrong"><td class="svelte-12oyimm"><code>hint</code></td><td class="svelte-12oyimm">33</td><td class="tags svelte-12oyimm">hint ×18 · parser ×15</td><td class="svelte-12oyimm">3</td><td class="svelte-12oyimm">2026-04-17 → 2026-09-22</td><td class="svelte-12oyimm">not this ticket — no ticket of its own</td></tr><!--]--></tbody></table> <!--[--><!--[0--><p class="note svelte-12oyimm">5 reports read as a one-day move; filed under <code>parser</code> by tenant.</p><!--]--><!--[-1--><!--]--><!--]--><!----> <h2>parser</h2> <p>The shared parser reads every date month first. All our tenants write the day first, so a
 booking for 2 March comes out as 3 February. This covers app and email reports from every
-tenant, and form reports from tenants on booking-v2. Ticket <a href="https://github.com/dandezmirean/support-kb/issues/1" rel="nofollow">#1</a>.</p> <h2>hint</h2> <p>The booking-v3 form prints <code>MM/DD/YYYY</code> under its date field. People type the month first, as
+tenant, and form reports from tenants on booking-v2. Ticket <a href="https://github.com/dandezmirean/support-kb/issues/1" rel="nofollow">#1</a> covers this row except the reports in
+the note under the table.</p> <h2>hint</h2> <p>The booking-v3 form prints <code>MM/DD/YYYY</code> under its date field. People type the month first, as
 the hint tells them, and the form reads the date the tenant’s way, day first. A parser fix
 leaves these broken. The hint has to change. Only tenants on booking-v3 who book through the
 form hit it. The table above still marks this row as having no ticket of its own. It has one
 now: <a href="https://github.com/dandezmirean/support-kb/issues/2" rel="nofollow">#2</a>.</p> <h2>one-day move</h2> <p>The reports in the note under the table have no day and month swapped. The booking lands one
 day early, or on a different day depending on where the reader is: “Client in Lisbon got
 Tuesday. Client in Toronto got Monday.” That points at time zones, not at the parser. The desk
-files them under <code>parser</code> by tenant and counts them there, so the <code>parser</code> count includes them.
-Ticket <a href="https://github.com/dandezmirean/support-kb/issues/3" rel="nofollow">#3</a>.</p> <p>The tenant and the channel decide a report’s cause (<code>causes.ts</code>). Intake’s tag guesses from the
+files them under <code>parser</code> by tenant and counts them there, so the <code>parser</code> row includes them.
+Ticket <a href="https://github.com/dandezmirean/support-kb/issues/3" rel="nofollow">#3</a> covers the reports in the note,
+and only those.</p> <p>The tenant and the channel decide a report’s cause (<code>causes.ts</code>). Intake’s tag guesses from the
 reporter’s browser and disagrees with the cause often, so this page does not use it.</p> <!--[0--><p class="stamp svelte-1280m42">desk ref <b class="svelte-1280m42">DR-5NVG-YRWZ</b></p><!--]--><!----><!----></main> <footer class="svelte-e2jw2j">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!--]--><!----><!--]--><!--]--> <!--[-1--><!--]--><!--]-->
 			
 			<script>
 				{
-					__sveltekit_tfok2m = {
+					__sveltekit_329oe6 = {
 						base: new URL("../../..", location).pathname.slice(0, -1)
 					};
 
 					const element = document.currentScript.parentElement;
 
 					Promise.all([
-						import("../../../_app/immutable/entry/start.BPrDg8QY.js"),
-						import("../../../_app/immutable/entry/app.BF5XwTYQ.js")
+						import("../../../_app/immutable/entry/start.BrXcwX5p.js"),
+						import("../../../_app/immutable/entry/app.BsOx_Qnx.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 5],

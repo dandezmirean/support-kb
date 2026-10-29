@@ -27,7 +27,8 @@ problem now has its own ticket:
 The shared parser reads every date month first. All our tenants write the day first, so a
 booking for 2 March comes out as 3 February. This covers app and email reports from every
 tenant, and form reports from tenants on booking-v2. Ticket
-[#1](https://github.com/dandezmirean/support-kb/issues/1).
+[#1](https://github.com/dandezmirean/support-kb/issues/1) covers this row except the reports in
+the note under the table.
 
 ## hint
 
@@ -42,8 +43,9 @@ now: [#2](https://github.com/dandezmirean/support-kb/issues/2).
 The reports in the note under the table have no day and month swapped. The booking lands one
 day early, or on a different day depending on where the reader is: "Client in Lisbon got
 Tuesday. Client in Toronto got Monday." That points at time zones, not at the parser. The desk
-files them under `parser` by tenant and counts them there, so the `parser` count includes them.
-Ticket [#3](https://github.com/dandezmirean/support-kb/issues/3).
+files them under `parser` by tenant and counts them there, so the `parser` row includes them.
+Ticket [#3](https://github.com/dandezmirean/support-kb/issues/3) covers the reports in the note,
+and only those.
 
 The tenant and the channel decide a report's cause (`causes.ts`). Intake's tag guesses from the
 reporter's browser and disagrees with the cause often, so this page does not use it.
