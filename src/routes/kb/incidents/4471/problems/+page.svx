@@ -1,6 +1,6 @@
 ---
 layout: runbook
-title: '#4471 · two problems in one ticket'
+title: '#4471 · three problems in one ticket'
 owner: dandezmirean
 status: open
 reviewed: 2026-10-29
@@ -13,11 +13,12 @@ signature: dandezmirean
 </script>
 
 [#4471](/kb/incidents/4471) holds every report about a wrong date and calls them one issue with
-one fix queued. The reports describe two problems, and one fix covers only the first. Each
+one fix queued. The reports describe three problems, and one fix covers only the first. Each
 problem now has its own ticket:
 
 - `parser`: [#1](https://github.com/dandezmirean/support-kb/issues/1)
 - `hint`: [#2](https://github.com/dandezmirean/support-kb/issues/2)
+- one-day move: [#3](https://github.com/dandezmirean/support-kb/issues/3)
 
 <CauseTable ticket={4471} />
 
@@ -36,13 +37,13 @@ leaves these broken. The hint has to change. Only tenants on booking-v3 who book
 form hit it. The table above still marks this row as having no ticket of its own. It has one
 now: [#2](https://github.com/dandezmirean/support-kb/issues/2).
 
-## The note under the table
+## one-day move
 
-The reports in the note have no day and month swapped. The booking lands one day early, or on
-a different day depending on where the reader is: "Client in Lisbon got Tuesday. Client in
-Toronto got Monday." The desk files them under `parser` by tenant and counts them there, so they
-are part of [#1](https://github.com/dandezmirean/support-kb/issues/1) and have no ticket of
-their own.
+The reports in the note under the table have no day and month swapped. The booking lands one
+day early, or on a different day depending on where the reader is: "Client in Lisbon got
+Tuesday. Client in Toronto got Monday." That points at time zones, not at the parser. The desk
+files them under `parser` by tenant and counts them there, so the `parser` count includes them.
+Ticket [#3](https://github.com/dandezmirean/support-kb/issues/3).
 
 The tenant and the channel decide a report's cause (`causes.ts`). Intake's tag guesses from the
 reporter's browser and disagrees with the cause often, so this page does not use it.
