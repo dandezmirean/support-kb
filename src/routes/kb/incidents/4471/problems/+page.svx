@@ -4,7 +4,7 @@ title: '#4471 · two more problems in one ticket'
 owner: dandezmirean
 status: open
 reviewed: 2026-10-29
-signature: dandezmirean
+signature: v1.eyJzdWIiOiIxMzQyIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyOTcwMDUsImV4cCI6MTc5MzM4MzQwNX0.y7MXWVwccRRPzMBSAmrlwoqlqFxYRrtxdDasPA2eeL0
 ---
 
 <script>
