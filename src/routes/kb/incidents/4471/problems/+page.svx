@@ -12,41 +12,33 @@ signature: v1.eyJzdWIiOiIxMzQyIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYX
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
 </script>
 
-[#4471](/kb/incidents/4471) held every report about a wrong date and called them one issue with
-one fix queued. Most of its reports share one cause, the parser, and #4471 stays that ticket. Two
-other problems sat inside it, and the queued fix covers neither. Their reports are now merged into
-tickets of their own, so each table below counts what its ticket covers.
-
-## parser: #4471
+[#4471](/kb/incidents/4471) holds every report about a wrong date and calls them one issue with
+one fix queued. Most of its reports share one cause, the parser, and #4471 is that ticket. Two
+other problems sit inside it, and the queued fix covers neither. Each has its own ticket now.
 
 <CauseTable ticket={4471} />
+
+## parser: #4471
 
 The shared parser reads every date month first. All our tenants write the day first, so a
 booking for 2 March comes out as 3 February. This covers app and email reports from every
 tenant, and form reports from tenants on booking-v2.
 
-The [incident page](/kb/incidents/4471) still gives the count from before the split in its text.
-Its table is current.
-
 ## hint: [#2](https://github.com/dandezmirean/support-kb/issues/2)
 
-<CauseTable ticket={2} />
-
-The booking-v3 form prints `MM/DD/YYYY` under its date field. People type the month first, as
-the hint tells them, and the form reads the date the tenant's way, day first. A parser fix
-leaves these broken. The hint has to change. Only tenants on booking-v3 who book through the
-form hit it.
+The `hint` row above. The booking-v3 form prints `MM/DD/YYYY` under its date field. People type
+the month first, as the hint tells them, and the form reads the date the tenant's way, day
+first. A parser fix leaves these broken. The hint has to change. Only tenants on booking-v3 who
+book through the form hit it. The table still says this row has no ticket of its own, because
+the export predates #2.
 
 ## one-day move: [#5](https://github.com/dandezmirean/support-kb/issues/5)
 
-<CauseTable ticket={5} />
-
-These reports have no day and month swapped. The booking lands one day early, or on a different
-day depending on where the reader is: "Client in Lisbon got Tuesday. Client in Toronto got
-Monday." That points at time zones, not at the parser. The desk's notes read them as a one-day
-move. The table still names their cause `parser`, because the cause comes from the tenant and the
-channel (`causes.ts`), and these came by app and email from day-first tenants. The note under the
-table is the desk's reading.
+The note under the table. These reports have no day and month swapped. The booking lands one
+day early, or on a different day depending on where the reader is: "Client in Lisbon got
+Tuesday. Client in Toronto got Monday." That points at time zones, not at the parser. The desk
+files them under `parser` by tenant and channel (`causes.ts`), so the table counts them in that
+row.
 
 Intake's tag guesses from the reporter's browser and disagrees with the cause often, so this page
 does not use it.
