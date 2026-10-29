@@ -8,57 +8,47 @@ signature: v1.eyJzdWIiOiIxMzQyIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYX
 ---
 
 <script>
-  import reports from '#lib/data/reports-4471.json';
-  import notes from '#lib/data/desk-notes.json';
-  import { groupByCause, readAs, uniqueById } from '#lib/kb/causes';
-  import { tenantOf } from '#lib/kb/locales';
   import CauseTable from '#lib/kb/CauseTable.svelte';
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
-
-  // Counted the way CauseTable counts #4471.
-  const groups = groupByCause(uniqueById(reports).filter((r) => r.mergedInto === 4471), tenantOf);
-  const hint = groups.find((g) => g.cause === 'hint').reports.length;
-  const oneDayMove = groups.reduce((n, g) => n + readAs(g, notes.oneDayMove), 0);
 </script>
 
-[#4471](/kb/incidents/4471) holds every report about a wrong date and calls them one issue with
-one fix queued. Most of its reports share one cause, the parser, and #4471 is that ticket. Two
-other problems sit inside it, and the queued fix covers neither. Each now has its own ticket:
+[#4471](/kb/incidents/4471) held every report about a wrong date and called them one issue with
+one fix queued. Most of its reports share one cause, the parser, and #4471 stays that ticket. Two
+other problems sat inside it, and the queued fix covers neither. Their reports are now merged into
+tickets of their own, so each table below counts what its ticket covers.
 
-<table>
-  <thead>
-    <tr><th>ticket</th><th>problem</th><th>reports</th></tr>
-  </thead>
-  <tbody>
-    <tr><td><a href="https://github.com/dandezmirean/support-kb/issues/2">#2</a></td><td>hint</td><td>{hint}</td></tr>
-    <tr><td><a href="https://github.com/dandezmirean/support-kb/issues/5">#5</a></td><td>one-day move</td><td>{oneDayMove}</td></tr>
-  </tbody>
-</table>
+## parser: #4471
 
 <CauseTable ticket={4471} />
 
-## parser
-
 The shared parser reads every date month first. All our tenants write the day first, so a
 booking for 2 March comes out as 3 February. This covers app and email reports from every
-tenant, and form reports from tenants on booking-v2. #4471 is the
-ticket for this row.
+tenant, and form reports from tenants on booking-v2.
 
-The reports in the note under the table have no day and month swapped. The booking lands one
-day early, or on a different day depending on where the reader is: "Client in Lisbon got
-Tuesday. Client in Toronto got Monday." That points at time zones, not at the parser. The desk files them
-under `parser` by tenant and counts them there. Ticket [#5](https://github.com/dandezmirean/support-kb/issues/5) tracks
-them as their own problem.
+The [incident page](/kb/incidents/4471) still gives the count from before the split in its text.
+Its table is current.
 
-## hint
+## hint: [#2](https://github.com/dandezmirean/support-kb/issues/2)
+
+<CauseTable ticket={2} />
 
 The booking-v3 form prints `MM/DD/YYYY` under its date field. People type the month first, as
 the hint tells them, and the form reads the date the tenant's way, day first. A parser fix
 leaves these broken. The hint has to change. Only tenants on booking-v3 who book through the
-form hit it. The table above still marks this row as having no ticket of its own. It has one
-now: [#2](https://github.com/dandezmirean/support-kb/issues/2).
+form hit it.
 
-The tenant and the channel decide a report's cause (`causes.ts`). Intake's tag guesses from the
-reporter's browser and disagrees with the cause often, so this page does not use it.
+## one-day move: [#5](https://github.com/dandezmirean/support-kb/issues/5)
+
+<CauseTable ticket={5} />
+
+These reports have no day and month swapped. The booking lands one day early, or on a different
+day depending on where the reader is: "Client in Lisbon got Tuesday. Client in Toronto got
+Monday." That points at time zones, not at the parser. The desk's notes read them as a one-day
+move. The table still names their cause `parser`, because the cause comes from the tenant and the
+channel (`causes.ts`), and these came by app and email from day-first tenants. The note under the
+table is the desk's reading.
+
+Intake's tag guesses from the reporter's browser and disagrees with the cause often, so this page
+does not use it.
 
 <RenderStamp {signature} />
