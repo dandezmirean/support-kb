@@ -8,20 +8,32 @@ signature: v1.eyJzdWIiOiIxMzQyIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYX
 ---
 
 <script>
+  import reports from '#lib/data/reports-4471.json';
+  import notes from '#lib/data/desk-notes.json';
+  import { groupByCause, readAs, uniqueById } from '#lib/kb/causes';
+  import { tenantOf } from '#lib/kb/locales';
   import CauseTable from '#lib/kb/CauseTable.svelte';
-  import TicketCounts from '#lib/kb/TicketCounts.svelte';
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
+
+  // Counted the way CauseTable counts #4471.
+  const groups = groupByCause(uniqueById(reports).filter((r) => r.mergedInto === 4471), tenantOf);
+  const hint = groups.find((g) => g.cause === 'hint').reports.length;
+  const oneDayMove = groups.reduce((n, g) => n + readAs(g, notes.oneDayMove), 0);
 </script>
 
 [#4471](/kb/incidents/4471) holds every report about a wrong date and calls them one issue with
 one fix queued. Most of its reports share one cause, the parser, and #4471 is that ticket. Two
 other problems sit inside it, and the queued fix covers neither. Each now has its own ticket:
 
-<TicketCounts
-  ticket={4471}
-  hint="https://github.com/dandezmirean/support-kb/issues/2"
-  oneDayMove="https://github.com/dandezmirean/support-kb/issues/5"
-/>
+<table>
+  <thead>
+    <tr><th>ticket</th><th>problem</th><th>reports</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><a href="https://github.com/dandezmirean/support-kb/issues/2">#2</a></td><td>hint</td><td>{hint}</td></tr>
+    <tr><td><a href="https://github.com/dandezmirean/support-kb/issues/5">#5</a></td><td>one-day move</td><td>{oneDayMove}</td></tr>
+  </tbody>
+</table>
 
 <CauseTable ticket={4471} />
 
